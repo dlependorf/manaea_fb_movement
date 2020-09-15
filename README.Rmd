@@ -1,5 +1,4 @@
 ---
-title: "Sean Manaea's Fastball Movement"
 output: github_document
 ---
 
