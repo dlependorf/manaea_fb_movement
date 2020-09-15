@@ -146,7 +146,7 @@ ggplot(old_manaea_fb_only_by_season) +
     theme(legend.position="none")
 ```
 
-<img src="README_files/figure-gfm/before_2020_graph-1.png" width="1120" />
+![](README_files/figure-gfm/before_2020_graph-1.png)<!-- -->
 
 ## Okay, so how about 2020?
 
@@ -211,7 +211,7 @@ ggplot(new_manaea_fb_only_by_start) +
     theme(legend.title=element_blank())
 ```
 
-<img src="README_files/figure-gfm/2020_by_start_graph-1.png" width="1120" />
+![](README_files/figure-gfm/2020_by_start_graph-1.png)<!-- -->
 
 Sean has pretty drastically increased how much his fastball moves
 horizontally over the season, and I don’t think it’s a coincidence that
@@ -246,7 +246,7 @@ ggplot() +
          fill="2016-2019")
 ```
 
-<img src="README_files/figure-gfm/combined_graph-1.png" width="1120" />
+![](README_files/figure-gfm/combined_graph-1.png)<!-- -->
 
 I don’t know how Sean will pitch moving forward in 2020, but the
 movement on his fastball is absolutely something to keep a close eye on.
