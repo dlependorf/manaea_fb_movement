@@ -40,19 +40,20 @@ manaea_raw_data <- tribble(~start_date, ~end_date,
                            "2018-01-01", "2018-12-31",
                            "2019-01-01", "2019-12-31",
                            "2020-01-01", "2020-09-12") %>%
-    # This mutate()/map2() call applies the scrape_statcast_savant() function to every start and end date in
-    # the dataframe. The results for each row are put into a separate third column called "data".
+    # This mutate()/map2() call applies the scrape_statcast_savant() function to every start and end
+    # date in the dataframe. The results for each row are put into a separate third column called
+    # "data".
     mutate(data=map2(.x=start_date, .y=end_date,
                      ~scrape_statcast_savant(start_date=.x,
                                              end_date=.y,
                                              playerid=640455,
                                              player_type="pitcher"))) %>%
-    # I don't actually need the dates any more, so the next two lines extract the Baseball Savant data and
-    # bind them all together into one dataframe.
+    # I don't actually need the dates any more, so the next two lines extract the Baseball Savant
+    # data and bind them all together into one dataframe.
     pull(data) %>%
     bind_rows() %>%
-    # The only cleanup I'm doing here is converting the pfx_x and pfx_z pitch movement columns from feet to
-    # inches.
+    # The only cleanup I'm doing here is converting the pfx_x and pfx_z pitch movement columns from
+    # feet to inches.
     mutate(across(pfx_x:pfx_z, ~12*.x))
 ```
 
@@ -101,7 +102,8 @@ old_manaea_fb_only_by_season <- old_manaea_fb_only %>%
               .groups="drop")
 
 ggplot(old_manaea_fb_only_by_season) +
-    geom_point(aes(x=pfx_x, y=pfx_z, fill=as.factor(season)), shape=21, alpha=0.5, size=20, color="transparent") +
+    geom_point(aes(x=pfx_x, y=pfx_z, fill=as.factor(season)),
+               shape=21, alpha=0.5, size=20, color="transparent") +
     geom_text(aes(x=pfx_x, y=pfx_z, label=season)) +
     scale_x_continuous("Horizontal Pitch Movement (in)", limits=c(0, 20)) +
     scale_y_continuous("Vertical Pitch Movement (in)", limits=c(0, 20)) +
@@ -139,7 +141,8 @@ Look at how much his fastball has changed across 2020!
 
 ```{r 2020_by_start_graph}
 ggplot(new_manaea_fb_only_by_start) +
-    geom_point(aes(x=pfx_x, y=pfx_z, color=paste0(start_num, " | ", game_date)), shape=1, size=6, stroke=2) +
+    geom_point(aes(x=pfx_x, y=pfx_z, color=paste0(start_num, " | ", game_date)),
+               shape=1, size=6, stroke=2) +
     geom_text(aes(x=pfx_x, y=pfx_z, label=start_num)) +
     scale_x_continuous("Horizontal Pitch Movement (in)", limits=c(0, 20)) +
     scale_y_continuous("Vertical Pitch Movement (in)", limits=c(0, 20)) +
@@ -157,9 +160,11 @@ With his latest start on September 10th, Manaea has been able to increase the am
 ```{r combined_graph}
 ggplot() +
     geom_point(data=old_manaea_fb_only_by_season,
-               aes(x=pfx_x, y=pfx_z, fill=as.factor(season)), shape=21, alpha=0.3, size=20, color="transparent") +
+               aes(x=pfx_x, y=pfx_z, fill=as.factor(season)),
+               shape=21, alpha=0.3, size=20, color="transparent") +
     geom_point(data=new_manaea_fb_only_by_start,
-               aes(x=pfx_x, y=pfx_z, color=paste0(start_num, " | ", game_date)), shape=1, size=6, stroke=2) +
+               aes(x=pfx_x, y=pfx_z, color=paste0(start_num, " | ", game_date)),
+               shape=1, size=6, stroke=2) +
     geom_text(data=new_manaea_fb_only_by_start,
               aes(x=pfx_x, y=pfx_z, label=start_num)) +
     scale_x_continuous("Horizontal Pitch Movement (in)", limits=c(0, 20)) +
