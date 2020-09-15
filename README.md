@@ -1,5 +1,3 @@
-Sean Manaea’s Fastball Movement
-================
 
 Sean Manaea has had an up and down 2020, and there has been a lot of
 talk around his fastball velocity and how it seems to track closely with
